@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 
 //Pages
 import HomePage from './pages/HomePage';
+import SignInPage from './pages/HomePage/SignInPage';
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />}></Route>
+				<Route path="/sign-in" element={<SignInPage />}></Route>
 			</Routes>
 			<Footer />
 		</Router>
