@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 
 //Pages
 import HomePage from './pages/HomePage';
-import SignInPage from './pages/SignInPage';
+import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />}></Route>
-				<Route path="/sign-in" element={<SignInPage />}></Route>
+				<Route path="/login" element={<LoginPage />}></Route>
 				<Route path="/user" element={<UserPage />}></Route>
 			</Routes>
 			<Footer />
