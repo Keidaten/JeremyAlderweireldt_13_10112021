@@ -9,6 +9,7 @@ const initialState = {
 
 const IDENTIFIERS = 'identifiers';
 const TOKEN = 'token';
+const LOGOUT = 'logout';
 
 //Actions
 
@@ -19,6 +20,8 @@ export const identifiers = (e, type) => ({
 });
 
 export const logUser = (token) => ({ type: TOKEN, payload: token });
+
+export const logout = () => ({ type: LOGOUT });
 
 // Reducer
 export default createReducer(initialState, (builder) => {
@@ -36,7 +39,8 @@ export default createReducer(initialState, (builder) => {
 		.addCase(TOKEN, (draft, action) => {
 			draft.token = action.payload;
 			return;
+		})
+		.addCase(LOGOUT, () => {
+			return initialState;
 		});
 });
-
-// export default reducer;

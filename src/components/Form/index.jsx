@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
 //features
-import { identifiers, logUser } from '../../features/signIn';
+import { identifiers, logUser } from '../../features/authentification';
 
 //selectors
 import { selectToken } from '../../utils/selectors';

@@ -2,10 +2,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 //Reducers
-import signInReducer from '../features/signIn';
+import authReducer from '../features/authentification';
 
 export default configureStore({
 	reducer: {
-		signIn: signInReducer,
+		signIn: authReducer,
 	},
 });
