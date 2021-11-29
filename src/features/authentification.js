@@ -1,6 +1,7 @@
 //Reduxtoolkit
 import { createReducer } from '@reduxjs/toolkit';
 
+//initialState
 const initialState = {
 	email: '',
 	password: '',
@@ -12,7 +13,6 @@ const TOKEN = 'token';
 const LOGOUT = 'logout';
 
 //Actions
-
 export const identifiers = (e, type) => ({
 	type: IDENTIFIERS,
 	input: type,

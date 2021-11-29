@@ -9,6 +9,7 @@ import { selectToken } from '../../utils/selectors';
 
 //features
 import { logout } from '../../features/authentification';
+import { resetProfile } from '../../features/profile';
 
 function Header() {
 	const dispatch = useDispatch();
@@ -29,7 +30,14 @@ function Header() {
 			)}
 			<div>
 				{token ? (
-					<NavLink to="/" className="main-nav-item" onClick={() => dispatch(logout())}>
+					<NavLink
+						to="/"
+						className="main-nav-item"
+						onClick={() => {
+							dispatch(logout());
+							dispatch(resetProfile());
+						}}
+					>
 						<i className="fa fa-user-circle"></i>
 						Sign out
 					</NavLink>
