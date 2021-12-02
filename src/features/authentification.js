@@ -6,10 +6,12 @@ const initialState = {
 	email: '',
 	password: '',
 	token: '',
+	remember: false,
 };
 
 const IDENTIFIERS = 'identifiers';
 const TOKEN = 'token';
+const REMEMBER = 'remember';
 const LOGOUT = 'logout';
 
 //Actions
@@ -20,6 +22,8 @@ export const identifiers = (e, type) => ({
 });
 
 export const logUser = (token) => ({ type: TOKEN, payload: token });
+
+export const rememberUser = (e) => ({ type: REMEMBER, payload: e.target.checked });
 
 export const logout = () => ({ type: LOGOUT });
 
@@ -38,6 +42,10 @@ export default createReducer(initialState, (builder) => {
 		})
 		.addCase(TOKEN, (draft, action) => {
 			draft.token = action.payload;
+			return;
+		})
+		.addCase(REMEMBER, (draft, action) => {
+			draft.remember = action.payload;
 			return;
 		})
 		.addCase(LOGOUT, () => {

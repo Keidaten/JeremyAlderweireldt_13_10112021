@@ -55,7 +55,7 @@ function UserPage() {
 			</div>
 			<h2 className="sr-only">Accounts</h2>
 			{accountInfos.map((account, index) => (
-				<AccountInfos index={index} title={account.title} amount={account.amount} description={account.description} />
+				<AccountInfos key={index} title={account.title} amount={account.amount} description={account.description} />
 			))}
 		</main>
 	);

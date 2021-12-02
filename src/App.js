@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-
-//Store
-import store from './utils/store';
+import { useEffect } from 'react';
 
 //Components
 import Header from './components/Header';
 import Footer from './components/Footer';
+
+//redux
+import { useDispatch, useStore } from 'react-redux';
+
+//features
+import { logout } from './features/authentification';
 
 //Pages
 import HomePage from './pages/HomePage';
@@ -14,18 +17,31 @@ import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 
 function App() {
+	const dispatch = useDispatch();
+	const store = useStore();
+
+	useEffect(() => {
+		window.addEventListener('beforeunload', (e) => {
+			const { remember } = store.getState().signIn;
+			e.preventDefault();
+			if (remember === false) {
+				dispatch(logout());
+			}
+			if (remember === true) {
+			}
+		});
+	});
+
 	return (
-		<Provider store={store}>
-			<Router>
-				<Header />
-				<Routes>
-					<Route path="/" element={<HomePage />}></Route>
-					<Route path="/login" element={<LoginPage />}></Route>
-					<Route path="/user" element={<UserPage />}></Route>
-				</Routes>
-				<Footer />
-			</Router>
-		</Provider>
+		<Router>
+			<Header />
+			<Routes>
+				<Route path="/" element={<HomePage />}></Route>
+				<Route path="/login" element={<LoginPage />}></Route>
+				<Route path="/user" element={<UserPage />}></Route>
+			</Routes>
+			<Footer />
+		</Router>
 	);
 }
 

@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
 //features
-import { identifiers, logUser } from '../../features/authentification';
+import { identifiers, logUser, rememberUser } from '../../features/authentification';
 
 //selectors
 import { selectToken } from '../../utils/selectors';
@@ -49,7 +49,7 @@ function Form() {
 					<input type="password" id="password" onChange={(e) => dispatch(identifiers(e, 'password'))} />
 				</div>
 				<div className="input-remember">
-					<input type="checkbox" id="remember-me" />
+					<input type="checkbox" id="remember-me" onChange={(e) => dispatch(rememberUser(e))} />
 					<label htmlFor="remember-me">Remember me</label>
 				</div>
 				<button className="sign-in-button">Sign In</button>
