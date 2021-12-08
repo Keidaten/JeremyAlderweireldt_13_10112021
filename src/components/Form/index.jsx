@@ -31,8 +31,9 @@ function Form() {
 					dispatch(logUser(response.data.body.token));
 				}
 			})
-			.catch((e) => {
-				setErrorFeedback(e.response.data.message);
+			.catch((response) => {
+				console.log(response.response);
+				setErrorFeedback(response.response.data.message);
 			});
 	};
 

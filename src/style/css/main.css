@@ -168,6 +168,11 @@ body {
 	color: #fff;
 }
 
+.--updateButton {
+	width: 10%;
+	margin: 0 auto;
+}
+
 .sign-in-content {
 	box-sizing: border-box;
 	background-color: white;
@@ -194,6 +199,11 @@ body {
 	flex-direction: column;
 	text-align: left;
 	margin-bottom: 1rem;
+}
+
+.edit-form {
+	width: 80%;
+	margin: 0 auto;
 }
 
 .input-wrapper label {
