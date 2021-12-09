@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-//axios
-import axios from 'axios';
-
 //redux
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
@@ -12,6 +9,9 @@ import { identifiers, logUser, rememberUser } from '../../features/authentificat
 
 //selectors
 import { selectToken } from '../../utils/selectors';
+
+//utils
+import { postLogin } from '../../utils/serviceAPI';
 
 function Form() {
 	const dispatch = useDispatch();
@@ -24,15 +24,13 @@ function Form() {
 
 		const user = store.getState().signIn;
 
-		return axios
-			.post('http://localhost:3001/api/v1/user/login', user)
+		postLogin(user)
 			.then((response) => {
 				if (response.data.body.token) {
 					dispatch(logUser(response.data.body.token));
 				}
 			})
 			.catch((response) => {
-				console.log(response.response);
 				setErrorFeedback(response.response.data.message);
 			});
 	};
