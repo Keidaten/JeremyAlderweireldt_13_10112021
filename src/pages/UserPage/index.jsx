@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router';
 
+//redux
 import { useStore, useDispatch } from 'react-redux';
 
 //features
@@ -15,10 +17,10 @@ function UserPage() {
 	const store = useStore();
 	const dispatch = useDispatch();
 	const [identified, setIdentified] = useState(false);
+	const { token } = store.getState().signIn;
 
 	//get user profile
 	useEffect(() => {
-		const { token } = store.getState().signIn;
 		const authorization = { Authorization: `Bearer ${token}` };
 
 		postUser(authorization)
@@ -27,16 +29,19 @@ function UserPage() {
 				dispatch(identification(response.data.body));
 			})
 			.catch(() => setIdentified(false));
-	}, [dispatch, store]);
+	}, [dispatch, store, token]);
 
 	return (
-		<main className="main bg-dark">
-			<div className="header">
-				<Welcome identified={identified} />
-				<UserEdit />
-			</div>
-			<AccountList />
-		</main>
+		<>
+			{!token && <Navigate to="/" />}
+			<main className="main bg-dark">
+				<div className="header">
+					<Welcome identified={identified} />
+					<UserEdit />
+				</div>
+				<AccountList />
+			</main>
+		</>
 	);
 }
 
