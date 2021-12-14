@@ -1,0 +1,224 @@
+swagger: '2.0'
+info:
+    title: Bank Argent API documentation
+    description: Contains all available API endpoints in this codebase
+    version: '1.0.0'
+    termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+    - http
+paths:
+    /user/{accountID}:
+        get:
+            security:
+                - Bearer: []
+            tags:
+                - Transactions Module
+            summary: Transactions API
+            description: API for user transactions of the month
+            parameters:
+                - in: path
+                  type: number
+                  name: accountID
+                  description: ID account
+                  required: true
+                - in: header
+                  type: 'string'
+                  name: Authorization
+                  description: Attach Bearer JWT token
+                  required: true
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: User's transactions retrieved successully
+                    schema:
+                        $ref: '#/definitions/Transactions_Response'
+                '400':
+                    description: Invalid Fields
+                '500':
+                    description: Internal Server Error
+    /user/{accountID}/{transactionID}:
+        get:
+            security:
+                - Bearer: []
+            tags:
+                - Transactions Module
+            summary: Transactions API
+            description: API for fetching details from a specific transaction
+            parameters:
+                - in: path
+                  type: number
+                  name: accountID
+                  description: Account ID to return transactions
+                  required: true
+                - in: path
+                  type: number
+                  name: transactionID
+                  description: Transaction ID to return transaction details
+                  required: true
+                - in: header
+                  type: 'string'
+                  name: Authorization
+                  description: Attach Bearer JWT token
+                  required: true
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: Transaction details retrieved successully
+                    schema:
+                        $ref: '#/definitions/Transaction_Details_Response'
+                '400':
+                    description: Invalid Fields
+                '500':
+                    description: Internal Server Error
+        put:
+            security:
+                - Bearer: []
+            tags:
+                - Transactions Module
+            summary: Transactions API
+            description: API for modifying transaction informations
+            parameters:
+                - in: path
+                  type: number
+                  name: accountID
+                  description: Account ID of account targeted
+                  required: true
+                - in: path
+                  type: number
+                  name: transactionID
+                  description: Transaction ID of transaction targeted
+                  required: true
+                - in: header
+                  type: 'string'
+                  name: Authorization
+                  description: Attach Bearer JWT token
+                  required: true
+                - in: body
+                  name: body
+                  description: additional transaction informations to modify
+                  schema:
+                      $ref: '#/definitions/Transaction_Informations'
+                  required: true
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: Additional transaction informations modified successully
+                    schema:
+                        $ref: '#/definitions/Transaction_Details_Response'
+                '400':
+                    description: Invalid Fields
+                '500':
+                    description: Internal Server Error
+        delete:
+            security:
+                - Bearer: []
+            tags:
+                - Transactions Module
+            summary: Transactions API
+            description: API for deleting informations of a transaction
+            parameters:
+                - in: path
+                  type: number
+                  name: accountID
+                  description: ID of account to return transactions
+                  required: true
+                - in: path
+                  type: number
+                  name: transactionID
+                  description: ID of transaction with additional informations
+                  required: true
+                - in: header
+                  type: 'string'
+                  name: Authorization
+                  description: Attach Bearer JWT token
+                  required: true
+            produces:
+                - application/json
+            responses:
+                '200':
+                    description: Transaction informations deleted successully
+                    schema:
+                        $ref: '#/definitions/Delete_Response'
+                '400':
+                    description: Invalid Fields
+                '500':
+                    description: Internal Server Error
+securityDefinitions:
+    Bearer:
+        type: apiKey
+        name: Authorization
+        in: header
+definitions:
+    Transactions_Response:
+        type: object
+        properties:
+            status:
+                type: integer
+            message:
+                type: string
+            body:
+                type: array
+                items:
+                    type: object
+                    properties:
+                        id:
+                            type: number
+                            description: transaction ID
+                        date:
+                            type: string
+                            description: transaction date
+                        description:
+                            type: string
+                            description: transaction description
+                        amount:
+                            type: number
+                            description: transaction amount
+                        balance:
+                            type: number
+                            description: account balance
+    Transaction_Details_Response:
+        type: object
+        properties:
+            status:
+                type: integer
+            message:
+                type: string
+            body:
+                type: object
+                properties:
+                    id:
+                        type: number
+                        description: transaction ID
+                    transactiontype:
+                        type: string
+                        description: transaction type
+                    category:
+                        type: string
+                        description: transaction category
+                    notes:
+                        type: string
+                        description: transaction notes
+    Transaction_Informations:
+        type: object
+        properties:
+            transactiontype:
+                type: string
+                description: transaction type
+            category:
+                type: string
+                description: transaction category
+            notes:
+                type: string
+                description: transaction notes
+    Delete_Response:
+        type: object
+        properties:
+            status:
+                type: integer
+            message:
+                type: string
